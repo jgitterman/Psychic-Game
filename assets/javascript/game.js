@@ -12,39 +12,65 @@ var wins = 0;
 var losses = 0;
 var guessesLeft = 10;
 var guessedLetters = [];
+var compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
 
-// Store variables?
+// Store variables
 var winsText = document.getElementById("wins");
 var lossesText = document.getElementById("losses");
 var guessesText = document.getElementById("guesses");
 var guessedText = document.getElementById("lettersGuessed");
+
+// Set up a reset function
+function reset() {
+  guessesLeft = 10;
+  guessedLetters = [];
+  compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
+  console.log(compGuess)
+}
+// call reset funciton
+reset();
+
+// Display variables before game starts
+winsText.textContent = "Wins: " + wins;
+lossesText.textContent = "Losses: " + losses;
+guessesText.textContent = "Guesses left: " + guessesLeft;
+guessedText.textContent = "Letters guessed: " + guessedLetters;
 
 // Trigger listener
 document.onkeyup = function (event) {
   // Determine which key was pressed
   var userGuess = event.key;
 
-  // Comp picks choice from array
-  var compGuess = compChoices[Math.floor(Math.random() * compChoices.length)];
-
+  // console log computers guess
   console.log(compGuess)
 
-  // Create if functions to determine winning
+  // Alert if they picked the letter already
+  if (guessedLetters.includes(userGuess)) {
+    alert(("You already guessed that letter." + "\n" + "try a different letter."));
+    return false;
+  }
+
+  // Create if functions to determine game status
   if (userGuess === compGuess) {
     wins++;
-    guessesLeft = 10;
-    guessedLetters = [];
     alert("You Win!" + "\n" + "But how did you know?" + "\n" + "Press any letter to play again!");
+    reset();
   } else {
     guessesLeft--;
     guessedLetters.push(userGuess);
     if (guessesLeft === 0) {
       losses++
-      guessesLeft += 10;
-      guessedLetters = [];
+      reset();
       alert("You Lose!" + "\n" + "I told you so :p" + "\n" + "Press any letter to play again!");
     }
   }
+
+  // Alert if they didnt click a letter
+  if (!compChoices.includes(userGuess)) {
+    alert("That is not a letter.");
+    guessesLeft++;
+  }
+
   // Display variables
   winsText.textContent = "Wins: " + wins;
   lossesText.textContent = "Losses: " + losses;
@@ -53,21 +79,7 @@ document.onkeyup = function (event) {
 
 }
 
-// Display variables
-winsText.textContent = "Wins: " + wins;
-lossesText.textContent = "Losses: " + losses;
-guessesText.textContent = "Guesses left: " + guessesLeft;
-guessedText.textContent = "Letters guessed: " + guessedLetters;
-
 
 // THINGS I STILL NEED TO FIGURE OUT...
-  // Make the computer's choice stays the same for the full round
-  // If same letter is clicked, alert(You already guessed that letter)
-              // insert after (guessedLetters.push(userGuess);)
-              // if (letter was already selected) {
-                // alert("You already guessed that letter" + "\n" + "try a different letter.")
-              // }
-  // If clicked key !== letter, alert(You can only guess)
-    // Is there a better way to reset on a win || a loss
-    // Is there a better way to display varibales before picking a letter and make the code work other than the way I did it?
-    // Is there a better way to add guessed letters on click
+// Is there a better way to display varibales before picking a letter and make the code work other than the way I did it?
+// Is there a better way to add guessed letters on click
