@@ -60,8 +60,14 @@ guessesText.textContent = "Guesses left: " + guessesLeft;
 guessedText.textContent = "Letters guessed: " + guessedLetters;
 
 
-// THINGS I STILL NEED TO FIGURE OUT
-  // Add guessed letters on click
+// THINGS I STILL NEED TO FIGURE OUT...
   // Make the computer's choice stays the same for the full round
+  // If same letter is clicked, alert(You already guessed that letter)
+              // insert after (guessedLetters.push(userGuess);)
+              // if (letter was already selected) {
+                // alert("You already guessed that letter" + "\n" + "try a different letter.")
+              // }
+  // If clicked key !== letter, alert(You can only guess)
     // Is there a better way to reset on a win || a loss
-  // Is there a better way to display varibales before picking a letter and make the code work other than the way I did it?
+    // Is there a better way to display varibales before picking a letter and make the code work other than the way I did it?
+    // Is there a better way to add guessed letters on click
